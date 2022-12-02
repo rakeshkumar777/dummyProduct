@@ -1,13 +1,10 @@
 import React from 'react';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import '../node_modules/bootstrap/dist/js/bootstrap.bundle';
-import Sign_up from './components/Sign_up';
 import {BrowserRouter,Routes,Route} from 'react-router-dom';
-import Signup from './components/Signup';
-import Login from './components/Login';
-import Forgot from './components/Forgot';
 import { Navbar, NavDropdown, Container, Nav, Form, Button } from 'react-bootstrap'
-import Card from './components/CardLogin';
+import CardLogin from './components/CardLogin';
+import CardSignup from './components/CardSignup';
 
 
 
@@ -53,20 +50,12 @@ const App = () => {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      {/* <Sign_up /> */}
-      {/* <Card /> */}
-      {/* <Card /> */}
-
-      <BrowserRouter>
-    <Routes>
-      <Route path='/' element={<Login/>}/>
-      <Route path='/Signup' element={<Signup/>}/>
-      <Route path='/Forgot' element={<Forgot/>}/>
-      
-    </Routes>
-    </BrowserRouter>
+   
+      <CardLogin/>
+      <CardSignup/>
 
 
+     
 
     </>
   )

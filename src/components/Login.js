@@ -33,7 +33,7 @@ const Login = () => {
     }).then(result => {
       console.log(result)
       alert("Success")
-      localStorage.setItem("token",result.data)
+      localStorage.setItem("token", result.data)
       navigate()
     }).catch(error => {
       console.log(error)

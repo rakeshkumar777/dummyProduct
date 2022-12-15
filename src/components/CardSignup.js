@@ -1,17 +1,15 @@
 import React from 'react'
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
-import InputGroup from 'react-bootstrap/InputGroup';
+
 
 
 
 const CardSignup = () => {
     return (
         <>
-            <Card className='shadow-lg' style={{ width: '18rem', marginLeft: "800px", marginTop: "-475px",marginBottom: "100px" }}>
+            <Card className='shadow-lg' style={{ width: '18rem', marginLeft: "500px",marginBottom: "100px" }}>
                 <Card.Header className='p-3' style={{ backgroundColor: "green" }}><h4 style={{ color: "white", marginLeft: "80px" }}>Register</h4></Card.Header>
                 <Card.Body>
                     <Form>

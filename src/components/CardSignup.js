@@ -9,14 +9,14 @@ import Form from 'react-bootstrap/Form';
 const CardSignup = () => {
     return (
         <>
-            <Card className='shadow-lg' style={{ width: '18rem', marginLeft: "500px",marginBottom: "100px" }}>
-                <Card.Header className='p-3' style={{ backgroundColor: "green" }}><h4 style={{ color: "white", marginLeft: "80px" }}>Register</h4></Card.Header>
+            <Card className='shadow-lg' style={{ width: '18rem', marginLeft: "500px",marginBottom: "25px",marginTop:"25px" }}>
+                <Card.Header className='p-3' style={{ backgroundColor: "#198754" }}><h4 style={{ color: "white", marginLeft: "80px" }}>Register</h4></Card.Header>
                 <Card.Body>
                     <Form>
                         <Form.Group className="mb-3" controlId="formBasicEmail">
                             <Form.Label>Full Name
                             </Form.Label>
-                            <Form.Control type="email" placeholder="Enter email" />
+                            <Form.Control type="text" placeholder="Enter full name" />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formBasicEmail">
                             <Form.Label>Email address</Form.Label>
@@ -39,7 +39,7 @@ const CardSignup = () => {
                                 feedbackType="invalid"
                             />
                         </Form.Group>
-                        <Button variant="success"  type="submit" style={{marginLeft:"70px",backgroundColor:"green"}}>Submit form</Button>
+                        <Button variant="outline-success"  type="submit" style={{marginLeft:"70px"}}>Submit form</Button>
                     </Form>
 
                 </Card.Body>

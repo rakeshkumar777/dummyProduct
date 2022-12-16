@@ -17,8 +17,8 @@ const Header = () => {
               navbarScroll
             >
               <Nav.Link index>Home</Nav.Link>
-              <Nav.Link onClick={() => { navigate("/login") }}>Login</Nav.Link>
-              <Nav.Link onClick={() => { navigate("/signup") }}>Sign Up</Nav.Link>
+              <Nav.Link onClick={() =>  navigate("/") }>Login</Nav.Link>
+              <Nav.Link onClick={() => navigate("/signup") }>Sign Up</Nav.Link>
               <NavDropdown title="Link" id="navbarScrollingDropdown">
                 <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
                 <NavDropdown.Item href="#action4">

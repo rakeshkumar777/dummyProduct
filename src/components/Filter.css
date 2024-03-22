@@ -8,3 +8,19 @@ ul{
     
 
 }
+.productCategory{
+    margin-bottom: 0;
+}
+.productCategory li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0;
+}
+.productDetialsHead{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #D8D8D8;
+}

@@ -1,14 +1,26 @@
 import React from 'react';
 import { Navbar, NavDropdown, Container, Nav, Form, Button } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom';
+import { backArrow } from '../utility/images';
 
 const Header = () => {
+  const pathname = window.location.pathname
+  console.log(pathname?.split("/")[1], 'pathname');
   const navigate = useNavigate()
+  const localStoragedata = localStorage.getItem("loggedin")
+  const handleLogout = () => {
+    localStorage.clear()
+    navigate("/")
+  }
   return (
     <>
       <Navbar bg="light" expand="lg">
         <Container fluid>
-          <Navbar.Brand href="#">Navbar scroll</Navbar.Brand>
+          {
+            pathname?.split("/")[1] == 'singleProduct' ?
+              <img style={{cursor:"pointer"}} onClick={()=>navigate(-1)} src={backArrow} alt='goback' /> : <></>
+          }
+          <Navbar.Brand href="#">Dummy Project</Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse id="navbarScroll">
             <Nav
@@ -16,29 +28,20 @@ const Header = () => {
               style={{ maxHeight: '100px' }}
               navbarScroll
             >
-              <Nav.Link index>Home</Nav.Link>
-              <Nav.Link onClick={() =>  navigate("/") }>Login</Nav.Link>
-              <Nav.Link onClick={() => navigate("/signup") }>Sign Up</Nav.Link>
-              <NavDropdown title="Link" id="navbarScrollingDropdown">
-                <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
-                <NavDropdown.Item href="#action4">
-                  Another action
-                </NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item href="#action5">
-                  Something else here
-                </NavDropdown.Item>
-              </NavDropdown>
+              {
+                localStoragedata ? <></> :
+                  <>
+                    <Nav.Link onClick={() => navigate("/")}>Login</Nav.Link>
+                    <Nav.Link onClick={() => navigate("/signup")}>Sign Up</Nav.Link>
+                  </>
+              }
             </Nav>
-            <Form className="d-flex">
-              <Form.Control
-                type="search"
-                placeholder="Search"
-                className="me-2"
-                aria-label="Search"
-              />
-              <Button variant="outline-success">Search</Button>
-            </Form>
+            {
+              localStoragedata ?
+                <Form className="d-flex">
+                  <Button onClick={() => handleLogout()} variant="outline-success">Logout</Button>
+                </Form> : <></>
+            }
           </Navbar.Collapse>
         </Container>
       </Navbar>

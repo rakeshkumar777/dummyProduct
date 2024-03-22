@@ -7,9 +7,9 @@ import Footer from './components/Footer';
 import CardLogin from './components/CardLogin';
 import CardSignup from './components/CardSignup';
 import Filter from './components/Filter';
-import CardLogout from './components/CardLogout';
 import { useSelector } from 'react-redux';
 import { selectUser } from './features/userSlice';
+import SingleProduct from './components/SingleProduct';
 
 
 const App = () => {
@@ -21,10 +21,11 @@ const App = () => {
       <Router>
         <Header />
         <Routes>
-          {user ? <Route path='/logout' element={<CardLogout />}/> : <Route path='/' element={<CardLogin />} />}
+          <Route path='/' element={<CardLogin />} />
           <Route path='/signup' element={<CardSignup />} />
           <Route path='/filter' element={<Filter />} />
-          
+          <Route path='/singleProduct/:id' element={<SingleProduct />} />
+
         </Routes>
         <Footer />
       </Router>

@@ -1,50 +1,27 @@
 import React from 'react'
-import {Button,Card,Form} from 'react-bootstrap';
+import { Button, Card, Form } from 'react-bootstrap';
 import { useState } from 'react';
-import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import {useDispatch} from 'react-redux';
-import {loggedin} from '../features/userSlice'
 
 
 const CardLogin = () => {
-  const dispatch=useDispatch()
   const navigate = useNavigate()
-  const [login, setLogin] = useState({
-    username: "",
-    password: ""
-  })
-  const changeHandler = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
-    setLogin({ ...login, [name]: [value] })
-  }
-  console.log("login", login)
+  const [name, setName] = useState("")
+  const [password, setPassword] = useState("")
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(loggedin({
-      username:login.username,
-      password:login.password,
-     
-    }))
-    setLogin(login);
-    axios.get("https://fakestoreapi.com/auth/login", {
-      username: login.username,
-      password: login.password
-    }).then((response) => {
-      console.log("response", response)
-      toast("login-Successful")
-      localStorage.setItem(response.token)
-      navigate("/logout")
-     
-    }).catch((err) => {
-      console.log("error", err)
-      toast.error("Login Unsuccessfull")
-      
-    })
+    let loginData = {
+     username: name,
+     password: password
+    }
+    console.log(loginData,'ddddddddddddddd');
+    if (name && password) {
+      localStorage.setItem("loggedin",loginData)
+      navigate("/filter")
+    } else {
+      alert("Please fill both username and password")
+    }
 
   }
   return (
@@ -55,17 +32,14 @@ const CardLogin = () => {
           <Form onSubmit={submitHandler}>
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label>Username/Email address</Form.Label>
-              <Form.Control value={login.username} onChange={changeHandler} name='username' type="text" placeholder="Enter username or email" />
+              <Form.Control value={name} onChange={(e) => setName(e.target.value)} name='username' type="text" placeholder="Enter username or email" />
               <Form.Text className="text-muted">
                 We'll never share your email with anyone else.
               </Form.Text>
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicPassword">
               <Form.Label>Password</Form.Label>
-              <Form.Control value={login.password} onChange={changeHandler} name='password' type="password" placeholder="Password" />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicCheckbox">
-              <Form.Check type="checkbox" label="Check me out" />
+              <Form.Control value={password} onChange={(e) => setPassword(e.target.value)} name='password' type="password" placeholder="Password" />
             </Form.Group>
             <Button style={{ marginLeft: "85px" }} variant="outline-primary" type="submit">
               Submit
@@ -74,10 +48,6 @@ const CardLogin = () => {
 
         </Card.Body>
       </Card>
-
-
-
-      <ToastContainer />
     </>
   )
 }

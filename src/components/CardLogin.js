@@ -15,7 +15,6 @@ const CardLogin = () => {
      username: name,
      password: password
     }
-    console.log(loginData,'ddddddddddddddd');
     if (name && password) {
       localStorage.setItem("loggedin",loginData)
       navigate("/filter")

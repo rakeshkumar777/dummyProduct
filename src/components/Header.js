@@ -2,13 +2,18 @@ import React from 'react';
 import { Navbar, NavDropdown, Container, Nav, Form, Button } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom';
 import { backArrow } from '../utility/images';
+import { logout, selectLoginAuth } from '../redux/slices/userSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
 const Header = () => {
   const pathname = window.location.pathname
   console.log(pathname?.split("/")[1], 'pathname');
+  const dispatch = useDispatch()
   const navigate = useNavigate()
-  const localStoragedata = localStorage.getItem("loggedin")
+  const loginData = useSelector(selectLoginAuth)
+
   const handleLogout = () => {
+    dispatch(logout())
     localStorage.clear()
     navigate("/")
   }
@@ -29,7 +34,7 @@ const Header = () => {
               navbarScroll
             >
               {
-                localStoragedata ? <></> :
+                loginData?.data?.token ? <></> :
                   <>
                     <Nav.Link onClick={() => navigate("/")}>Login</Nav.Link>
                     <Nav.Link onClick={() => navigate("/signup")}>Sign Up</Nav.Link>
@@ -37,7 +42,7 @@ const Header = () => {
               }
             </Nav>
             {
-              localStoragedata ?
+              loginData?.data?.token ?
                 <Form className="d-flex">
                   <Button onClick={() => handleLogout()} variant="outline-success">Logout</Button>
                 </Form> : <></>

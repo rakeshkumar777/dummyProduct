@@ -2,25 +2,49 @@ import React from 'react'
 import { Button, Card, Form } from 'react-bootstrap';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { loginAsync, selectLoginAuth } from '../redux/slices/userSlice';
+import { unwrapResult } from '@reduxjs/toolkit';
 
 
 const CardLogin = () => {
   const navigate = useNavigate()
+  const dispatch = useDispatch()
   const [name, setName] = useState("")
   const [password, setPassword] = useState("")
+  const [buttonLoading, setButtonLoading] = useState(false)
+  const loginData = useSelector(selectLoginAuth)
+  console.log(loginData?.data?.token, 'kkkkkkkkkkkkkk');
 
   const submitHandler = (e) => {
     e.preventDefault();
-    let loginData = {
-     username: name,
-     password: password
+    let data = {
+      username: name,
+      password: password
     }
-    if (name && password) {
-      localStorage.setItem("loggedin",loginData)
-      navigate("/filter")
-    } else {
-      alert("Please fill both username and password")
-    }
+    setButtonLoading(true)
+    dispatch(loginAsync(data))
+      .then(unwrapResult)
+      .then((obj) => {
+        setButtonLoading(false)
+        if (obj?.data?.token) {
+          navigate("/filter")
+        }
+      })
+      .catch((obj) => {
+        setButtonLoading(false)
+      })
+    // let loginData = {
+    //  username: name,
+    //  password: password
+    // }
+    // if (name && password) {
+    //   localStorage.setItem("loggedin",loginData)
+    //   navigate("/filter")
+    // } else {
+    //   alert("Please fill both username and password")
+    // }
 
   }
   return (
@@ -41,7 +65,10 @@ const CardLogin = () => {
               <Form.Control value={password} onChange={(e) => setPassword(e.target.value)} name='password' type="password" placeholder="Password" />
             </Form.Group>
             <Button style={{ marginLeft: "85px" }} variant="outline-primary" type="submit">
-              Submit
+              {buttonLoading && (
+                <span className="spinner-border spinner-border-sm"></span>
+              )}
+              <span>Submit</span>
             </Button>
           </Form>
 

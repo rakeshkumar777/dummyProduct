@@ -7,17 +7,26 @@ import Footer from './components/Footer';
 import CardLogin from './components/CardLogin';
 import CardSignup from './components/CardSignup';
 import Filter from './components/Filter';
-import { useSelector } from 'react-redux';
-import { selectUser } from './features/userSlice';
 import SingleProduct from './components/SingleProduct';
+import { ToastContainer } from 'react-toastify';
 
 
 const App = () => {
-  const user = useSelector(selectUser)
 
   return (
     <>
-
+      <ToastContainer
+        position="top-right"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={true}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+      // limit={1}
+      // pauseOnHover
+      />
       <Router>
         <Header />
         <Routes>

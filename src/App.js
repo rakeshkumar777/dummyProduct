@@ -9,32 +9,38 @@ import CardSignup from './components/CardSignup';
 import Filter from './components/Filter';
 import SingleProduct from './components/SingleProduct';
 import { ToastContainer } from 'react-toastify';
-
+import Protected from './components/Protected';
+import { selectLoginAuth } from './redux/slices/userSlice';
+import { useSelector } from 'react-redux';
+import NotFound from './components/404';
 
 const App = () => {
-
+  const loginData = useSelector(selectLoginAuth)
+  console.log(loginData?.data?.token, 'appppppp sssssssss');
   return (
     <>
-      <ToastContainer
-        position="top-right"
-        autoClose={2000}
-        hideProgressBar={false}
-        newestOnTop={true}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-      // limit={1}
-      // pauseOnHover
-      />
       <Router>
         <Header />
+        {/* <ToastContainer
+          position="top-right"
+          autoClose={2000}
+          hideProgressBar={false}
+          newestOnTop={true}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+        // limit={1}
+        // pauseOnHover
+        /> */}
         <Routes>
           <Route path='/' element={<CardLogin />} />
           <Route path='/signup' element={<CardSignup />} />
-          <Route path='/filter' element={<Filter />} />
-          <Route path='/singleProduct/:id' element={<SingleProduct />} />
-
+          <Route element={<Protected token={loginData?.data?.token} />} >
+            <Route path='/filter' element={<Filter />} />
+            <Route path='/singleProduct/:id' element={<SingleProduct />} />
+          </Route>
+          <Route path='/*' element={<NotFound />} />
         </Routes>
         <Footer />
       </Router>
